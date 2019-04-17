@@ -18,8 +18,20 @@ album1 = Album.new({
 
 album1.save()
 
+album2 = Album.new({
+  'artist_id' => artist1.id,
+  'title' => 'Diamond Dogs',
+  'genre' => 'Glam Rock'
+  })
+
+album2.save()
+
 
 p album1.artist()
+
+p artist1.albums()
+
+
 
 # artist2.save()
 # artist1.delete()
