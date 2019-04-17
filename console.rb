@@ -32,6 +32,14 @@ album2 = Album.new({
 
 album2.save()
 
+album3 = Album.new({
+  'artist_id' => artist2.id,
+  'title' => 'Time',
+  'genre' => 'Prog Rock'
+  })
+
+album3.save()
+
 
 album1.artist()
 
@@ -45,7 +53,7 @@ album2.artist.albums
 
 Artist.find(artist1.id)
 
-p Album.find(album2.id)
+Album.find(album2.id)
 
 
 # artist1.delete()
