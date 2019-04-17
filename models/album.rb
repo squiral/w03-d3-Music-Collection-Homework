@@ -4,7 +4,7 @@ require('PG')
 
 class Album
 
-  attr_reader :title, :genre, :artist_id
+  attr_reader :id, :title, :genre, :artist_id
 
   def initialize(options)
     @id = options['id'].to_i if options['id']
@@ -54,6 +54,15 @@ class Album
     albums = SqlRunner.run( sql )
     return albums.map { |album| Album.new( album ) }
   end
+
+
+  def self.find(id)
+   sql = "SELECT * FROM albums WHERE id = $1;"
+   values = [id]
+   result = SqlRunner.run( sql, values )
+   album = result.map { |album| Album.new( album ) }
+   return album
+ end
 
 
 

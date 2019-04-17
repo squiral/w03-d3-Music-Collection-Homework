@@ -10,6 +10,12 @@ artist1 = Artist.new({
 
 artist1.save()
 
+artist2 = Artist.new({
+  'name' => 'Electric Light Orchestra'
+  })
+
+artist2.save()
+
 album1 = Album.new({
   'artist_id' => artist1.id,
   'title' => 'Blackstar',
@@ -27,12 +33,21 @@ album2 = Album.new({
 album2.save()
 
 
-p album1.artist()
+album1.artist()
 
-p artist1.albums()
+artist1.albums()
+
+Artist.all()
+Album.all()
+
+album2.artist.albums
 
 
+Artist.find(artist1.id)
 
-# artist2.save()
+p Album.find(album2.id)
+
+
 # artist1.delete()
+
 # artist2.delete()
