@@ -1,3 +1,5 @@
+require_relative('../db/sql_runner.rb')
+require_relative('artist.rb')
 require('PG')
 
 class Album
@@ -9,6 +11,15 @@ class Album
     @title = options['title']
     @genre = options['genre']
     @artist_id = options['artist_id'].to_i
+  end
+
+  def artist()
+    sql = "SELECT * FROM artists WHERE id = $1"
+    values = [@artist_id]
+    results = SqlRunner.run( sql, values )
+    artist_data = results[0]
+    artist = Artist.new( artist_data )
+    return artist
   end
 
   def save()

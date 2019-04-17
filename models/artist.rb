@@ -1,5 +1,7 @@
 require('PG')
+require_relative('album.rb')
 require_relative('../db/sql_runner.rb')
+
 
 class Artist
 
@@ -10,6 +12,9 @@ class Artist
     @id = options['id'].to_i if options['id']
     @name = options['name']
   end
+
+  def albums()
+    sql = "SELECT * FROM albums"
 
   def save()
     db = PG.connect({dbname: 'music_collection', host: 'localhost'})

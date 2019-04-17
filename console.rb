@@ -16,12 +16,10 @@ album1 = Album.new({
   'genre' => 'Experimental Rock'
   })
 
-  album1.save()
+album1.save()
 
 
-artist2 = Artist.new({
-  'name' => 'Taylor Swift'
-  })
+p album1.artist()
 
 # artist2.save()
 # artist1.delete()
