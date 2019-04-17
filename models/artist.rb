@@ -23,7 +23,6 @@ class Artist
 
 
   def save()
-    db = PG.connect({dbname: 'music_collection', host: 'localhost'})
     sql = "INSERT INTO artists
     (
       name
@@ -34,9 +33,7 @@ class Artist
     )
     RETURNING id"
     values = [@name]
-    db.prepare("save", sql)
-    @id = db.exec_prepared("save", values)[0]["id"]
-    db.close()
+    @id = SqlRunner.run( sql, values )[0]["id"]
   end
 
   def delete()
