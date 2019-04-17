@@ -26,16 +26,26 @@ class Album
     RETURNING id"
     values = [@title, @genre, @artist_id]
     db.prepare("save", sql)
-    @id = db.exec_prepared("save", values)[0]["id"]
+    result = db.exec_prepared("save", values)
     db.close()
+    @id = result[0]['id'].to_i
+  end
+
+  def delete()
+    sql = "DELETE FROM albums WHERE id = $1"
+    values = [@id]
+    SqlRunner.run( sql, values )
   end
 
   def self.delete_all()
-    db = PG.connect({dbname: 'music_collection', host: 'localhost'})
     sql = "DELETE FROM albums"
-    db.prepare("delete_all", sql)
-    result = db.exec_prepared("delete_all")
-    db.close()
+    SqlRunner.run( sql )
+  end
+
+  def self.all()
+    sql = "SELECT * FROM albums;"
+    albums = SqlRunner.run( sql )
+    return albums.map { |album| Album.new( album ) }
   end
 
 

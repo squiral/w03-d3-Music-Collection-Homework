@@ -1,4 +1,5 @@
 require('PG')
+require_relative('../db/sql_runner.rb')
 
 class Artist
 
@@ -28,20 +29,21 @@ class Artist
   end
 
   def delete()
-    db = PG.connect({dbname: 'music_collection', host: 'localhost'})
     sql = "DELETE FROM artists WHERE id = $1"
     values = [@id]
-    db.prepare("delete", sql)
-    db.exec_prepared("delete", values)
-    db.close()
+    SqlRunner.run( sql, values )
   end
 
   def self.delete_all()
-    db = PG.connect({dbname: 'music_collection', host: 'localhost'})
     sql = "DELETE FROM artists"
-    db.prepare("delete_all", sql)
-    result = db.exec_prepared("delete_all")
-    db.close()
+    SqlRunner.run( sql )
+  end
+
+
+  def self.all()
+    sql = "SELECT * FROM artists;"
+    artists = SqlRunner.run( sql )
+    return artists.map { |artist| Artist.new( artist ) }
   end
 
 

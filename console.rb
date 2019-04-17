@@ -10,6 +10,15 @@ artist1 = Artist.new({
 
 artist1.save()
 
+album1 = Album.new({
+  'artist_id' => artist1.id,
+  'title' => 'Blackstar',
+  'genre' => 'Experimental Rock'
+  })
+
+  album1.save()
+
+
 artist2 = Artist.new({
   'name' => 'Taylor Swift'
   })
